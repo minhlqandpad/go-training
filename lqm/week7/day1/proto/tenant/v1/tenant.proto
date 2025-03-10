@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package tenant.v1;
+
+option go_package = "github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/gen/go;tenantv1";
+
+service TenantService {
+    rpc GetTenant (GetTenantRequest) returns (GetTenantResponse) {}
+}
+
+message Tenant {
+    string id = 1;
+    string Name = 2;
+    string email = 3;
+}
+
+message GetTenantResponse {
+    Tenant tenant = 1;
+}
+
+message GetTenantRequest {
+    string Name = 1;
+}
