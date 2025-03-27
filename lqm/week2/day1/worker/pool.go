@@ -84,7 +84,7 @@ func (p *Pool) Start(ctx context.Context) {
 		defer p.resultWaitGroup.Done()
 		for result := range p.results {
 			if result.State == 1 {
-				p.TotalSuceed++
+				p.TotalSucceed++
 			} else {
 				p.TotalFailed++
 			}

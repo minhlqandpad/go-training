@@ -10,7 +10,7 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/tuannguyenandpadcojp/go-training/lqm/week2/goroutine/worker"
+	"github.com/tuannguyenandpadcojp/go-training/lqm/week2/day1/worker"
 )
 
 func main() {
@@ -42,7 +42,7 @@ func main() {
 	<-c
 	log.Println("Total Goroutine before release the pool: ", runtime.NumGoroutine())
 	pool.Release()
-	log.Printf("Jobs success:%d - failed:%d", pool.TotalSuceed, pool.TotalFailed)
+	log.Printf("Jobs success:%d - failed:%d", pool.TotalSucceed, pool.TotalFailed)
 	time.Sleep(5 * time.Second)
 	log.Println("Total Goroutine after release the pool: ", runtime.NumGoroutine())
 }

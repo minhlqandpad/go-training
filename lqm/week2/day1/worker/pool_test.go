@@ -37,7 +37,7 @@ func TestWorkerPool(t *testing.T) {
 	pool.Release()
 
 	expectSuccess, expectFail := 5, 5
-	resultSuccess, resultFail := pool.TotalSuceed, pool.TotalFailed
+	resultSuccess, resultFail := pool.TotalSucceed, pool.TotalFailed
 
 	utils.AssertCorrectResult(t, resultSuccess, expectSuccess)
 	utils.AssertCorrectResult(t, resultFail, expectFail)
@@ -75,8 +75,8 @@ func TestWorkerPoolNonBlocking(t *testing.T) {
 	pool.Release()
 
 	// Check results
-	if pool.TotalSuceed != 5 {
-		t.Errorf("Expected 5 successful jobs, got %d", pool.TotalSuceed)
+	if pool.TotalSucceed != 5 {
+		t.Errorf("Expected 5 successful jobs, got %d", pool.TotalSucceed)
 	}
 	if pool.TotalFailed != 0 {
 		t.Errorf("Expected 0 failed jobs, got %d", pool.TotalFailed)
