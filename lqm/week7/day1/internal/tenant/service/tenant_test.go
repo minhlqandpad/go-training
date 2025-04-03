@@ -7,39 +7,39 @@ import (
 
 	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/assert"
-	pb "github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/gen/go/tenant/v1"
-	"github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/db"
 	mocks "github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/db/mock_db"
+	"github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/domain"
+	pb "github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/pb/v1"
 )
 
 func TestTenantService_GetTenant(t *testing.T) {
 	tests := []struct {
 		name       string
-		inputName  string
-		mockTenant *db.Tenant
+		inputId    string
+		mockTenant *domain.Tenant
 		mockError  error
 		wantTenant *pb.Tenant
 		wantErr    bool
 	}{
 		{
 			name:       "tenant found",
-			inputName:  "test",
-			mockTenant: &db.Tenant{ID: "tenant-123", Name: "test", Email: "test@example.com"},
+			inputId:    "tenant-123",
+			mockTenant: &domain.Tenant{ID: "tenant-123", Name: "test", Email: "test@example.com"},
 			mockError:  nil,
 			wantTenant: &pb.Tenant{Id: "tenant-123", Name: "test", Email: "test@example.com"},
 			wantErr:    false,
 		},
 		{
 			name:       "tenant not found",
-			inputName:  "unknown",
-			mockTenant: nil,
+			inputId:    "unknown",
+			mockTenant: &domain.Tenant{ID: "tenant-123", Name: "test", Email: "test@example.com"},
 			mockError:  nil,
 			wantTenant: nil,
 			wantErr:    false,
 		},
 		{
 			name:       "database error",
-			inputName:  "error-case",
+			inputId:    "error-case",
 			mockTenant: nil,
 			mockError:  errors.New("database failure"),
 			wantTenant: nil,
@@ -55,13 +55,13 @@ func TestTenantService_GetTenant(t *testing.T) {
 
 			// Create mock
 			mockDB := mocks.NewMockTenantDB(ctrl)
-			mockDB.EXPECT().GetTenantByName(tt.inputName).Return(tt.mockTenant, tt.mockError)
+			mockDB.EXPECT().GetTenantById(tt.inputId).Return(tt.mockTenant, tt.mockError)
 
 			// Create service with mock
 			s := NewTenantService(mockDB)
 
 			// Call GetTenant
-			resp, err := s.GetTenant(context.Background(), &pb.GetTenantRequest{Name: tt.inputName})
+			resp, err := s.GetTenant(context.Background(), &pb.GetTenantRequest{Id: tt.inputId})
 
 			// Assert results
 			if tt.wantErr {

@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             (unknown)
-// source: tenant/v1/tenant.proto
+// source: v1/tenant_service.proto
 
 package tenantv1
 
@@ -117,5 +117,5 @@ var TenantService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "tenant/v1/tenant.proto",
+	Metadata: "v1/tenant_service.proto",
 }

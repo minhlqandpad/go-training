@@ -1,25 +1,21 @@
-package service
+package v1
 
 import (
 	"context"
 
-	pb "github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/gen/go/tenant/v1"
+	pb "github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/pb/v1"
+
 	"github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/db"
+	tenant_v1 "github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/pb/v1"
 )
 
 type TenantService struct {
-	pb.UnimplementedTenantServiceServer
-	db db.TenantDB
-}
-
-func NewTenantService(db db.TenantDB) *TenantService {
-	return &TenantService{
-		db: db,
-	}
+	tenant_v1.UnimplementedTenantServiceServer
+	DB db.TenantDB
 }
 
 func (s *TenantService) GetTenant(ctx context.Context, req *pb.GetTenantRequest) (*pb.GetTenantResponse, error) {
-	tenant, err := s.db.GetTenantByName(req.GetName())
+	tenant, err := s.DB.GetTenantById(req.GetId())
 	if err != nil {
 		return nil, err
 	}

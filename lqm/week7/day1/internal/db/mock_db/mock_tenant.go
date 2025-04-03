@@ -8,7 +8,7 @@ import (
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
-	db "github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/db"
+	domain "github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/domain"
 )
 
 // MockTenantDB is a mock of TenantDB interface.
@@ -34,17 +34,17 @@ func (m *MockTenantDB) EXPECT() *MockTenantDBMockRecorder {
 	return m.recorder
 }
 
-// GetTenantByName mocks base method.
-func (m *MockTenantDB) GetTenantByName(name string) (*db.Tenant, error) {
+// GetTenantById mocks base method.
+func (m *MockTenantDB) GetTenantById(name string) (*domain.Tenant, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetTenantByName", name)
-	ret0, _ := ret[0].(*db.Tenant)
+	ret := m.ctrl.Call(m, "GetTenantById", name)
+	ret0, _ := ret[0].(*domain.Tenant)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// GetTenantByName indicates an expected call of GetTenantByName.
-func (mr *MockTenantDBMockRecorder) GetTenantByName(name interface{}) *gomock.Call {
+// GetTenantById indicates an expected call of GetTenantById.
+func (mr *MockTenantDBMockRecorder) GetTenantById(name interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTenantByName", reflect.TypeOf((*MockTenantDB)(nil).GetTenantByName), name)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetTenantById", reflect.TypeOf((*MockTenantDB)(nil).GetTenantById), name)
 }
