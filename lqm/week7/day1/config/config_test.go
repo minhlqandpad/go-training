@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/tuannguyenandpadcojp/go-training/lqm/utils"
+	"github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/utils"
 )
 
 func Test_loadConfig(t *testing.T) {

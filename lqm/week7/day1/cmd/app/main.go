@@ -27,7 +27,7 @@ func main() {
 	dsn := config.DSN()
 
 	// Run migrations
-	m, err := migrate.New("file://migrations", "mysql://"+dsn)
+	m, err := migrate.New("file://database/migrations", "mysql://"+dsn)
 	if err != nil {
 		log.Fatalf("failed to initialize migrations: %v", err)
 	}

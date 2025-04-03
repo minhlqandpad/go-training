@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: grpc
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  grpc-server:
+    build: .
+    ports:
+      - "50051:50051"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    env_file:
+      - .env
+
+volumes:
+  mysql-data:
