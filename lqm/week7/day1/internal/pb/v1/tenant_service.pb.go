@@ -65,27 +65,27 @@ func (x *GetTenantResponse) GetTenant() *Tenant {
 	return nil
 }
 
-type GetTenantRequest struct {
+type GetTenantByIDRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *GetTenantRequest) Reset() {
-	*x = GetTenantRequest{}
+func (x *GetTenantByIDRequest) Reset() {
+	*x = GetTenantByIDRequest{}
 	mi := &file_v1_tenant_service_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *GetTenantRequest) String() string {
+func (x *GetTenantByIDRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetTenantRequest) ProtoMessage() {}
+func (*GetTenantByIDRequest) ProtoMessage() {}
 
-func (x *GetTenantRequest) ProtoReflect() protoreflect.Message {
+func (x *GetTenantByIDRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_v1_tenant_service_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -97,12 +97,12 @@ func (x *GetTenantRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetTenantRequest.ProtoReflect.Descriptor instead.
-func (*GetTenantRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetTenantByIDRequest.ProtoReflect.Descriptor instead.
+func (*GetTenantByIDRequest) Descriptor() ([]byte, []int) {
 	return file_v1_tenant_service_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *GetTenantRequest) GetId() string {
+func (x *GetTenantByIDRequest) GetId() string {
 	if x != nil {
 		return x.Id
 	}
@@ -115,11 +115,11 @@ const file_v1_tenant_service_proto_rawDesc = "" +
 	"\n" +
 	"\x17v1/tenant_service.proto\x12\ttenant.v1\x1a\x0fv1/tenant.proto\">\n" +
 	"\x11GetTenantResponse\x12)\n" +
-	"\x06tenant\x18\x01 \x01(\v2\x11.tenant.v1.TenantR\x06tenant\"\"\n" +
-	"\x10GetTenantRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id2Y\n" +
-	"\rTenantService\x12H\n" +
-	"\tGetTenant\x12\x1b.tenant.v1.GetTenantRequest\x1a\x1c.tenant.v1.GetTenantResponse\"\x00BQZOgithub.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/pb;tenantv1b\x06proto3"
+	"\x06tenant\x18\x01 \x01(\v2\x11.tenant.v1.TenantR\x06tenant\"&\n" +
+	"\x14GetTenantByIDRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id2a\n" +
+	"\rTenantService\x12P\n" +
+	"\rGetTenantByID\x12\x1f.tenant.v1.GetTenantByIDRequest\x1a\x1c.tenant.v1.GetTenantResponse\"\x00BQZOgithub.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/pb;tenantv1b\x06proto3"
 
 var (
 	file_v1_tenant_service_proto_rawDescOnce sync.Once
@@ -135,14 +135,14 @@ func file_v1_tenant_service_proto_rawDescGZIP() []byte {
 
 var file_v1_tenant_service_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_v1_tenant_service_proto_goTypes = []any{
-	(*GetTenantResponse)(nil), // 0: tenant.v1.GetTenantResponse
-	(*GetTenantRequest)(nil),  // 1: tenant.v1.GetTenantRequest
-	(*Tenant)(nil),            // 2: tenant.v1.Tenant
+	(*GetTenantResponse)(nil),    // 0: tenant.v1.GetTenantResponse
+	(*GetTenantByIDRequest)(nil), // 1: tenant.v1.GetTenantByIDRequest
+	(*Tenant)(nil),               // 2: tenant.v1.Tenant
 }
 var file_v1_tenant_service_proto_depIdxs = []int32{
 	2, // 0: tenant.v1.GetTenantResponse.tenant:type_name -> tenant.v1.Tenant
-	1, // 1: tenant.v1.TenantService.GetTenant:input_type -> tenant.v1.GetTenantRequest
-	0, // 2: tenant.v1.TenantService.GetTenant:output_type -> tenant.v1.GetTenantResponse
+	1, // 1: tenant.v1.TenantService.GetTenantByID:input_type -> tenant.v1.GetTenantByIDRequest
+	0, // 2: tenant.v1.TenantService.GetTenantByID:output_type -> tenant.v1.GetTenantResponse
 	2, // [2:3] is the sub-list for method output_type
 	1, // [1:2] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name

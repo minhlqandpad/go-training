@@ -7,8 +7,8 @@ import (
 	"net"
 
 	"github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/config"
-	"github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/pb/v1"
-	"github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/db"
+	"github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/domain/infrastructure/db"
+	tenantv1 "github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/pb/v1"
 	"github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/tenant/service"
 	"google.golang.org/grpc"
 )

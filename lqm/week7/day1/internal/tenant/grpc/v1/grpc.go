@@ -1,23 +1,25 @@
+// internal/tenant/grpc/v1/tenant_service.go
 package v1
 
 import (
 	"context"
 
+	"github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/domain/infrastructure/db"
 	pb "github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/pb/v1"
-
-	"github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/db"
-	tenant_v1 "github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/pb/v1"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 type TenantService struct {
-	tenant_v1.UnimplementedTenantServiceServer
+	pb.UnimplementedTenantServiceServer
 	DB db.TenantDB
 }
 
-func (s *TenantService) GetTenant(ctx context.Context, req *pb.GetTenantRequest) (*pb.GetTenantResponse, error) {
-	tenant, err := s.DB.GetTenantById(req.GetId())
+// GetTenantByID implements the gRPC method
+func (s *TenantService) GetTenantByID(ctx context.Context, req *pb.GetTenantByIDRequest) (*pb.GetTenantResponse, error) {
+	tenant, err := s.DB.GetTenantByID(ctx, req.GetId())
 	if err != nil {
-		return nil, err
+		return nil, status.Errorf(codes.Internal, "failed to get tenant: %v", err)
 	}
 	if tenant == nil {
 		return &pb.GetTenantResponse{Tenant: nil}, nil

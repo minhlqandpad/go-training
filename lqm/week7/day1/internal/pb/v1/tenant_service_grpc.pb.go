@@ -19,14 +19,14 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	TenantService_GetTenant_FullMethodName = "/tenant.v1.TenantService/GetTenant"
+	TenantService_GetTenantByID_FullMethodName = "/tenant.v1.TenantService/GetTenantByID"
 )
 
 // TenantServiceClient is the client API for TenantService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type TenantServiceClient interface {
-	GetTenant(ctx context.Context, in *GetTenantRequest, opts ...grpc.CallOption) (*GetTenantResponse, error)
+	GetTenantByID(ctx context.Context, in *GetTenantByIDRequest, opts ...grpc.CallOption) (*GetTenantResponse, error)
 }
 
 type tenantServiceClient struct {
@@ -37,10 +37,10 @@ func NewTenantServiceClient(cc grpc.ClientConnInterface) TenantServiceClient {
 	return &tenantServiceClient{cc}
 }
 
-func (c *tenantServiceClient) GetTenant(ctx context.Context, in *GetTenantRequest, opts ...grpc.CallOption) (*GetTenantResponse, error) {
+func (c *tenantServiceClient) GetTenantByID(ctx context.Context, in *GetTenantByIDRequest, opts ...grpc.CallOption) (*GetTenantResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetTenantResponse)
-	err := c.cc.Invoke(ctx, TenantService_GetTenant_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, TenantService_GetTenantByID_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +51,7 @@ func (c *tenantServiceClient) GetTenant(ctx context.Context, in *GetTenantReques
 // All implementations must embed UnimplementedTenantServiceServer
 // for forward compatibility.
 type TenantServiceServer interface {
-	GetTenant(context.Context, *GetTenantRequest) (*GetTenantResponse, error)
+	GetTenantByID(context.Context, *GetTenantByIDRequest) (*GetTenantResponse, error)
 	mustEmbedUnimplementedTenantServiceServer()
 }
 
@@ -62,8 +62,8 @@ type TenantServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedTenantServiceServer struct{}
 
-func (UnimplementedTenantServiceServer) GetTenant(context.Context, *GetTenantRequest) (*GetTenantResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetTenant not implemented")
+func (UnimplementedTenantServiceServer) GetTenantByID(context.Context, *GetTenantByIDRequest) (*GetTenantResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTenantByID not implemented")
 }
 func (UnimplementedTenantServiceServer) mustEmbedUnimplementedTenantServiceServer() {}
 func (UnimplementedTenantServiceServer) testEmbeddedByValue()                       {}
@@ -86,20 +86,20 @@ func RegisterTenantServiceServer(s grpc.ServiceRegistrar, srv TenantServiceServe
 	s.RegisterService(&TenantService_ServiceDesc, srv)
 }
 
-func _TenantService_GetTenant_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetTenantRequest)
+func _TenantService_GetTenantByID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTenantByIDRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TenantServiceServer).GetTenant(ctx, in)
+		return srv.(TenantServiceServer).GetTenantByID(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: TenantService_GetTenant_FullMethodName,
+		FullMethod: TenantService_GetTenantByID_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TenantServiceServer).GetTenant(ctx, req.(*GetTenantRequest))
+		return srv.(TenantServiceServer).GetTenantByID(ctx, req.(*GetTenantByIDRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -112,8 +112,8 @@ var TenantService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*TenantServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetTenant",
-			Handler:    _TenantService_GetTenant_Handler,
+			MethodName: "GetTenantByID",
+			Handler:    _TenantService_GetTenantByID_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

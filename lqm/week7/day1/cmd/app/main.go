@@ -13,7 +13,7 @@ import (
 	_ "github.com/golang-migrate/migrate/v4/source/file"
 	"github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/cmd/server"
 	"github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/config"
-	"github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/db"
+	"github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/domain/infrastructure/db"
 )
 
 func main() {
@@ -34,6 +34,7 @@ func main() {
 	if err := m.Up(); err != nil && err != migrate.ErrNoChange {
 		log.Fatalf("failed to apply migrations: %v", err)
 	}
+	log.Println("Building gRPC")
 	log.Println("Migrations applied successfully")
 
 	// Connect to MySQL

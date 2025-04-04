@@ -6,13 +6,13 @@ option go_package = "github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/
 import "v1/tenant.proto";
 
 service TenantService {
-    rpc GetTenant (GetTenantRequest) returns (GetTenantResponse) {}
+    rpc GetTenantByID (GetTenantByIDRequest) returns (GetTenantResponse) {}
 }
 
 message GetTenantResponse {
     Tenant tenant = 1;
 }
 
-message GetTenantRequest {
+message GetTenantByIDRequest {
     string id = 1;
 }
