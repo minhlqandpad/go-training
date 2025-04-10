@@ -13,7 +13,7 @@ import (
 	_ "github.com/golang-migrate/migrate/v4/source/file"
 	"github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/cmd/server"
 	"github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/config"
-	"github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/domain/infrastructure/db"
+	"github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/infrastructure/db/mysql"
 )
 
 func main() {
@@ -38,7 +38,7 @@ func main() {
 	log.Println("Migrations applied successfully")
 
 	// Connect to MySQL
-	mysqlDB, err := db.NewMySQLDB(dsn)
+	mysqlDB, err := mysql.NewMySQLDB(dsn)
 	if err != nil {
 		log.Fatalf("failed to connect to db: %v", err)
 	}

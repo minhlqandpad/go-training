@@ -27,9 +27,21 @@ func LoadConfig(envPath string) (Config, error) {
 		godotenv.Load()
 	}
 
-	port, _ := strconv.Atoi(os.Getenv("DB_PORT"))
-	httpPort, _ := strconv.Atoi(os.Getenv("HTTP_PORT"))
-	grpcPort, _ := strconv.Atoi(os.Getenv("GRPC_PORT"))
+	portStr := os.Getenv("DB_PORT")
+	port, err := strconv.Atoi(portStr)
+	if err != nil {
+		return Config{}, fmt.Errorf("invalid DB_PORT value '%s': %v", portStr, err)
+	}
+	httpPortStr := os.Getenv("HTTP_PORT")
+	httpPort, err := strconv.Atoi(httpPortStr)
+	if err != nil {
+		return Config{}, fmt.Errorf("invalid HTTP_PORT value '%s': %v", httpPortStr, err)
+	}
+	grpcPortStr := os.Getenv("GRPC_PORT")
+	grpcPort, err := strconv.Atoi(grpcPortStr)
+	if err != nil {
+		return Config{}, fmt.Errorf("invalid GRPC_PORT value '%s': %v", grpcPortStr, err)
+	}
 
 	config := Config{
 		User:     os.Getenv("DB_USER"),

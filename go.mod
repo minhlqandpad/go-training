@@ -9,5 +9,3 @@ require (
 	go.uber.org/goleak v1.3.0
 	go.uber.org/mock v0.5.0
 )
-
-replace github.com/tuannguyenandpadcojp/go-training/lqm => ../../../
