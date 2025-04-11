@@ -10,7 +10,7 @@ run:
 	go run cmd/app/main.go
 
 mock:
-	mockgen -source=internal/domain/repository/tenant.go -destination=internal/infrastructure/db/mock_db/mock_tenant_repository.go -package=mocks
+	mockgen -source=internal/domain/repository/tenant.go -destination=internal/domain/repository/mock_repository/mock_tenant_repository.go -package=mock_repository
 
 test:
 	go test -v -race -cover ./...

@@ -4,7 +4,6 @@ import (
 	"context"
 
 	pb "github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/pb/v1"
-	"github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/tenant/service"
 	usecase "github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/usecase/tenant"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -12,12 +11,12 @@ import (
 
 type TenantServiceServer struct {
 	pb.UnimplementedTenantServiceServer
-	TenantService service.TenantService
+	GetTenantService usecase.IGetTenant
 }
 
-func NewTenantService(s *service.TenantService) *TenantServiceServer{
+func NewTenantService(uc usecase.IGetTenant) *TenantServiceServer {
 	return &TenantServiceServer{
-		TenantService: *s,
+		GetTenantService: uc,
 	}
 }
 
@@ -39,7 +38,7 @@ func toUsecaseRequest(req *pb.GetTenantByIDRequest) *usecase.GetTenantRequest {
 
 func (s *TenantServiceServer) GetTenantByID(ctx context.Context, req *pb.GetTenantByIDRequest) (*pb.GetTenantResponse, error) {
 	usecaseReq := toUsecaseRequest(req)
-	resp, err := s.TenantService.GetTenant(ctx, usecaseReq)
+	resp, err := s.GetTenantService.GetTenant(ctx, usecaseReq)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "failed to get tenant: %v", err)
 	}
