@@ -3,6 +3,7 @@ package v1
 import (
 	"context"
 
+	"github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/domain"
 	pb "github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/pb/v1"
 	usecase "github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/usecase/tenant"
 	"google.golang.org/grpc/codes"
@@ -20,27 +21,26 @@ func NewTenantService(uc usecase.IGetTenant) *TenantServiceServer {
 	}
 }
 
-func toGRPCResponse(resp *usecase.GetTenantResponse) *pb.GetTenantResponse {
-	return &pb.GetTenantResponse{
-		Tenant: &pb.Tenant{
-			Id:    resp.Tenant.ID,
-			Name:  resp.Tenant.Name,
-			Email: resp.Tenant.Email,
-		},
-	}
-}
-
-func toUsecaseRequest(req *pb.GetTenantByIDRequest) *usecase.GetTenantRequest {
-	return &usecase.GetTenantRequest{
-		TenantID: req.Id,
+func toPbTenant(tenant domain.Tenant) pb.Tenant {
+	return pb.Tenant{
+		Id: tenant.ID,
+		Name: tenant.Name,
+		Email: tenant.Email,
 	}
 }
 
 func (s *TenantServiceServer) GetTenantByID(ctx context.Context, req *pb.GetTenantByIDRequest) (*pb.GetTenantResponse, error) {
-	usecaseReq := toUsecaseRequest(req)
+	usecaseReq := &usecase.GetTenantRequest{
+		TenantID: req.Id,
+	}
+
 	resp, err := s.GetTenantService.GetTenant(ctx, usecaseReq)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "failed to get tenant: %v", err)
 	}
-	return toGRPCResponse(resp), nil
+
+	respTenant := toPbTenant(resp.Tenant)
+	return &pb.GetTenantResponse{
+		Tenant: &respTenant,
+	}, nil
 }
