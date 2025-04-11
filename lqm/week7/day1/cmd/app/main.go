@@ -11,6 +11,7 @@ import (
 	"github.com/golang-migrate/migrate/v4"
 	_ "github.com/golang-migrate/migrate/v4/database/mysql"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
+
 	"github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/cmd/server"
 	"github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/config"
 	"github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/infrastructure/db/mysql"

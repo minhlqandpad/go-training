@@ -6,12 +6,13 @@ import (
 	"log"
 	"net"
 
+	"google.golang.org/grpc"
+
 	"github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/config"
 	"github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/infrastructure/db/mysql"
 	tenantv1 "github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/pb/v1"
 	v1 "github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/tenant/grpc/v1"
 	"github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/tenant/service"
-	"google.golang.org/grpc"
 )
 
 type Server struct {

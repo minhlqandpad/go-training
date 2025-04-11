@@ -3,11 +3,12 @@ package v1
 import (
 	"context"
 
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
+
 	"github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/domain"
 	pb "github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/pb/v1"
 	usecase "github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/usecase/tenant"
-	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/status"
 )
 
 type TenantServiceServer struct {
@@ -23,8 +24,8 @@ func NewTenantService(uc usecase.IGetTenant) *TenantServiceServer {
 
 func toPbTenant(tenant domain.Tenant) pb.Tenant {
 	return pb.Tenant{
-		Id: tenant.ID,
-		Name: tenant.Name,
+		Id:    tenant.ID,
+		Name:  tenant.Name,
 		Email: tenant.Email,
 	}
 }

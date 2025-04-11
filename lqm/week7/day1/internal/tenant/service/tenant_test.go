@@ -6,10 +6,11 @@ import (
 
 	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/assert"
+	"google.golang.org/grpc/status"
+
 	"github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/domain"
 	mocks "github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/domain/repository/mock_repository"
 	usecase "github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/usecase/tenant"
-	"google.golang.org/grpc/status"
 )
 
 func TestTenantService_GetTenantByID(t *testing.T) {
