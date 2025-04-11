@@ -13,12 +13,12 @@ import (
 
 type TenantServiceServer struct {
 	pb.UnimplementedTenantServiceServer
-	GetTenantService usecase.IGetTenant
+	GetTenantUC usecase.IGetTenant
 }
 
 func NewTenantService(uc usecase.IGetTenant) *TenantServiceServer {
 	return &TenantServiceServer{
-		GetTenantService: uc,
+		GetTenantUC: uc,
 	}
 }
 
@@ -35,7 +35,7 @@ func (s *TenantServiceServer) GetTenantByID(ctx context.Context, req *pb.GetTena
 		TenantID: req.Id,
 	}
 
-	resp, err := s.GetTenantService.GetTenant(ctx, usecaseReq)
+	resp, err := s.GetTenantUC.GetTenant(ctx, usecaseReq)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "failed to get tenant: %v", err)
 	}
