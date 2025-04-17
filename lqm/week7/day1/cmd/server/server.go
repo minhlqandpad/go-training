@@ -39,16 +39,17 @@ func NewServer(cfg config.Config, mysqlDB *mysql.MySQLDB) *Server {
 	}
 }
 
-func (s *Server) Start() {
+func (s *Server) Start() error {
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", s.config.GRPCPort))
 	if err != nil {
-		log.Fatalf("failed to listen: %v", err)
+		return fmt.Errorf("failed to listen: %v", err)
 	}
 
 	log.Printf("gRPC server listening on port %d", s.config.GRPCPort)
 	if err := s.grpcServer.Serve(lis); err != nil {
-		log.Fatalf("failed to serve: %v", err)
+		return fmt.Errorf("failed to serve: %v", err)
 	}
+	return nil
 }
 
 func (s *Server) Stop(ctx context.Context) {

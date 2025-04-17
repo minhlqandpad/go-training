@@ -9,6 +9,8 @@ import (
 	"time"
 
 	"github.com/golang-migrate/migrate/v4"
+	_ "github.com/golang-migrate/migrate/v4/database/mysql"
+	_ "github.com/golang-migrate/migrate/v4/source/file"
 
 	"github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/cmd/server"
 	"github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/config"
@@ -46,7 +48,11 @@ func main() {
 	// Start gRPC server
 	s := server.NewServer(config, mysqlDB)
 
-	s.Start()
+	go func() {
+		if err := s.Start(); err != nil {
+			log.Fatalf("failed to start server: %v", err)
+		}
+	}()
 
 	// init signal channel
 	sig := make(chan os.Signal, 1)

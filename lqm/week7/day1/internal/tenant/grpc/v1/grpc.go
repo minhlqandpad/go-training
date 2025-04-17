@@ -39,6 +39,9 @@ func (s *TenantServiceServer) GetTenantByID(ctx context.Context, req *pb.GetTena
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "failed to get tenant: %v", err)
 	}
+	if resp == nil || resp.Tenant.ID == "" {
+		return nil, status.Errorf(codes.NotFound, "tenant id '%v' not found", req.Id)
+	}
 
 	respTenant := toPbTenant(resp.Tenant)
 	return &pb.GetTenantResponse{
