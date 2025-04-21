@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package tenant.v1;
+option go_package = "github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/pb;tenantv1";
+
+import "v1/tenant.proto";
+
+service TenantService {
+    rpc GetTenantByID (GetTenantByIDRequest) returns (GetTenantResponse) {}
+}
+
+message GetTenantResponse {
+    Tenant tenant = 1;
+}
+
+message GetTenantByIDRequest {
+    string id = 1;
+}

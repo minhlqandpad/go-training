@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package tenant.v1;
+option go_package = "github.com/tuannguyenandpadcojp/go-training/lqm/week7/day1/internal/pb;tenantv1";
+
+import "v1/tenant.proto";
+
+service AdminService {
+    rpc CreateTenant (CreateTenantRequest) returns (CreateTenantResponse) {}
+}
+
+message CreateTenantResponse {
+    Tenant tenant = 1;
+}
+
+message CreateTenantRequest {
+    string id = 1;
+    string name = 2;
+    string email = 3;
+}
